@@ -22,6 +22,17 @@ class AccountManager extends Manager {
         parent::__construct($db);
     }
 
+    function getById($id) {
+        $query = $this->db->prepare("SELECT * FROM accounts WHERE id = :id");
+        $query->bindValue(':id', $id);
+        $query->execute();
+        
+        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $acc = new Account();
+        $acc->hydrate($data);
+        return $acc;
+    }
+
     function getByUsername($username) {
         $query = $this->db->prepare("SELECT * FROM accounts WHERE username = :username");
         $query->bindValue(':username', $username);

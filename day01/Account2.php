@@ -21,12 +21,7 @@ class Account {
 
     // same que __get pour set
     function __set($name, $value) {
-        if ($name == 'password') {
-            $this->_data[$name] = hash('sha256', $value);
-        }
-        else {
-            $this->_data[$name] = $value;
-        }
+        $this->_data[$name] = $value;
     }
 
     public function __isset($name)
